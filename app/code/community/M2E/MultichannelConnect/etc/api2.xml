@@ -1,0 +1,356 @@
+<?xml version="1.0"?>
+<config>
+    <api2>
+        <resource_groups>
+            <m2e_multichannel translate="title" module="api2">
+                <title>M2E Multichannel Connect</title>
+                <sort_order>150</sort_order>
+            </m2e_multichannel>
+        </resource_groups>
+        <resources>
+            <m2e_category translate="title" module="api2">
+                <group>catalog_product</group>
+                <title>M2E Category</title>
+                <model>MultichannelConnect/api2_category</model>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                    </admin>
+                </privileges>
+                <versions>1</versions>
+                <attributes translate="">
+                    <entity_id>Category ID</entity_id>
+                    <parent_id>Product Category ID</parent_id>
+                    <name>Category Name</name>
+                    <is_active>Is Category Active</is_active>
+                </attributes>
+                <routes>
+                    <route_collection>
+                        <route>/m2ecloud/categories</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+            </m2e_category>
+
+            <m2e_product module="api2">
+                <group>catalog_product</group>
+                <model>MultichannelConnect/api2_product</model>
+                <working_model>catalog/product</working_model>
+                <title>M2E Catalog Product</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                    </admin>
+                </privileges>
+                <attributes translate="entity_id type_id attribute_set_id stock_data image_url is_saleable total_reviews_count url buy_now_url has_custom_options is_in_stock regular_price_with_tax regular_price_without_tax final_price_with_tax final_price_without_tax use_config_gift_message_available use_config_gift_wrapping_available url_key_create_redirect" module="api2">
+                    <entity_id>Product ID</entity_id>
+                    <type_id>Product Type</type_id>
+                    <created_at>Created At</created_at>
+                    <updated_at>Updated At</updated_at>
+                    <attribute_set_id>Attribute Set</attribute_set_id>
+                    <stock_data>Inventory Data</stock_data>
+                    <image_url>Default Image</image_url>
+                    <is_saleable>Salability Status</is_saleable>
+                    <url>Product URL</url>
+                    <is_in_stock>Stock Status</is_in_stock>
+                    <regular_price_with_tax>Regular Price With Tax</regular_price_with_tax>
+                    <regular_price_without_tax>Regular Price Without Tax</regular_price_without_tax>
+                    <final_price_with_tax>Final Price With Tax</final_price_with_tax>
+                    <final_price_without_tax>Final Price Without Tax</final_price_without_tax>
+                    <media_gallery>Product Media Gallery</media_gallery>
+                    <category_ids>Product Category Ids</category_ids>
+                    <items>Product Category Ids</items>
+                    <total_count>Product Category Ids</total_count>
+                    <page_size>Product Category Ids</page_size>
+                    <current_page>Product Category Ids</current_page>
+                </attributes>
+                <exclude_attributes>
+                    <admin>
+                        <read>
+                            <allow_open_amount>1</allow_open_amount>
+                            <giftcard_amounts>1</giftcard_amounts>
+                            <open_amount_min>1</open_amount_min>
+                            <open_amount_max>1</open_amount_max>
+                            <image>1</image>
+                            <is_recurring>1</is_recurring>
+                            <gallery>1</gallery>
+                            <price_view>1</price_view>
+                            <small_image>1</small_image>
+                            <image_url>1</image_url>
+                            <is_saleable>1</is_saleable>
+                            <total_reviews_count>1</total_reviews_count>
+                            <url>1</url>
+                            <buy_now_url>1</buy_now_url>
+                            <has_custom_options>1</has_custom_options>
+                            <is_in_stock>1</is_in_stock>
+                            <regular_price_with_tax>1</regular_price_with_tax>
+                            <regular_price_without_tax>1</regular_price_without_tax>
+                            <final_price_with_tax>1</final_price_with_tax>
+                            <final_price_without_tax>1</final_price_without_tax>
+                            <recurring_profile>1</recurring_profile>
+                            <thumbnail>1</thumbnail>
+                            <url_key_create_redirect>1</url_key_create_redirect>
+                            <meta_title>1</meta_title>
+                            <meta_description>1</meta_description>
+                            <custom_design>1</custom_design>
+                            <page_layout>1</page_layout>
+                            <options_container>1</options_container>
+                            <gift_message_available>1</gift_message_available>
+                            <meta_keyword>1</meta_keyword>
+                            <custom_layout_update>1</custom_layout_update>
+                            <custom_design_from>1</custom_design_from>
+                            <custom_design_to>1</custom_design_to>
+                        </read>
+                    </admin>
+                </exclude_attributes>
+                <routes>
+                    <route_entity>
+                        <route>/m2ecloud/products/:sku</route>
+                        <action_type>entity</action_type>
+                    </route_entity>
+                    <route_collection>
+                        <route>/m2ecloud/products</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </m2e_product>
+            <m2e_product_attributes module="api2">
+                <group>catalog_product</group>
+                <model>MultichannelConnect/api2_product_attributes</model>
+                <working_model>catalog/product</working_model>
+                <title>M2E Catalog Product Attributes</title>
+                <sort_order>15</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                    </admin>
+                </privileges>
+                <attributes module="api2">
+                    <attribute_code_list>Attribute Code List</attribute_code_list>
+                </attributes>
+                <routes>
+                    <route_collection>
+                        <route>/m2ecloud/product-attributes</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </m2e_product_attributes>
+
+            <m2e_stock_item translate="title" module="api2">
+                <group>cataloginventory</group>
+                <model>MultichannelConnect/api2_stock_item</model>
+                <title>M2E Stock Item</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                    </admin>
+                </privileges>
+                <attributes translate="item_id product_id qty is_in_stock manage_stock use_config_manage_stock" module="api2">
+                    <item_id>Item ID</item_id>
+                    <product_id>Product ID</product_id>
+                    <product_sku>Product ID</product_sku>
+                    <qty>Qty</qty>
+                    <is_in_stock>Stock Availability</is_in_stock>
+                    <manage_stock>Manage Stock</manage_stock>
+                    <use_config_manage_stock>Use Config Settings for Manage Stock</use_config_manage_stock>
+                    <store_manage_stock>Config Settings for Manage Stock</store_manage_stock>
+                </attributes>
+                <force_attributes>
+                    <admin>
+                        <item_id>1</item_id>
+                    </admin>
+                </force_attributes>
+                <routes>
+                    <route_entity>
+                        <route>/m2ecloud/stockitems/:sku</route>
+                        <action_type>entity</action_type>
+                    </route_entity>
+                    <route_collection>
+                        <route>/m2ecloud/stockitems</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </m2e_stock_item>
+
+            <order>
+                <attributes>
+                    <updated_at>Updated At</updated_at>
+                    <items>Items</items>
+                </attributes>
+            </order>
+
+            <m2e_order translate="title" module="api2">
+                <group>sales</group>
+                <model>MultichannelConnect/api2_order</model>
+                <title>M2E Order</title>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <update>1</update>
+                    </admin>
+                </privileges>
+                <attributes translate="item_id product_id qty is_in_stock manage_stock use_config_manage_stock" module="api2">
+                    <orderInformation>Order Information</orderInformation>
+
+                    <shippingAddress>Shipping Address</shippingAddress>
+                    <region>Region</region>
+                    <countryId>Country Id</countryId>
+                    <street>Street</street>
+                    <telephone>Telephone</telephone>
+                    <postcode>Postcode</postcode>
+                    <city>City</city>
+                    <firstname>First Name</firstname>
+                    <lastname>Last Name</lastname>
+                    <email>Email</email>
+                    <billingAddress>Billing Address</billingAddress>
+
+                    <orderItems>Order Items</orderItems>
+                    <sku>SKU</sku>
+                    <qty>Quantity</qty>
+                    <price>Price</price>
+
+                    <storeViewCode>Store View Code</storeViewCode>
+                    <currency>Currency</currency>
+                    <channelOrderId>Channel Order Id</channelOrderId>
+
+                    <shippingInformation>Shipping Information</shippingInformation>
+                    <isShipped>Is Shipped</isShipped>
+                    <trackingTitle>Tracking Title</trackingTitle>
+                    <trackingNumber>Tracking Number</trackingNumber>
+
+                    <tax>Tax</tax>
+                    <total>Total</total>
+                    <shipping_tax>Shipping Tax</shipping_tax>
+
+                    <totals>Totals</totals>
+                    <subtotal>Subtotal</subtotal>
+                    <shipping>Shipping</shipping>
+
+                    <shipment_id>Shipment Id</shipment_id>
+                </attributes>
+                <force_attributes>
+                    <admin>
+                        <item_id>1</item_id>
+                    </admin>
+                </force_attributes>
+                <routes>
+                    <route_entity>
+                        <route>/m2ecloud/order/:id</route>
+                        <action_type>collection</action_type>
+                    </route_entity>
+                    <route_collection>
+                        <route>/m2ecloud/order</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </m2e_order>
+
+            <m2e_order_shipment translate="title" module="api2">
+                <group>sales</group>
+                <model>MultichannelConnect/api2_order_shipment</model>
+                <title>M2E Order Shipment</title>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                    </admin>
+                </privileges>
+                <attributes translate="orderId" module="api2">
+                    <orderId>Order ID</orderId>
+                </attributes>
+                <routes>
+                    <route_entity>
+                        <route>/m2ecloud/order-ship</route>
+                        <action_type>collection</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </m2e_order_shipment>
+
+            <m2e_order_track translate="title" module="api2">
+                <group>sales</group>
+                <model>MultichannelConnect/api2_order_track</model>
+                <title>M2E Order Shipment Track</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <create>1</create>
+                        <update>1</update>
+                    </admin>
+                </privileges>
+                <attributes translate="orderId" module="api2">
+                    <order_id>Order ID</order_id>
+                    <carrier_code>Carrier Code</carrier_code>
+                    <description>Description</description>
+                    <title>Title</title>
+                    <track_number>Track Number</track_number>
+                    <parent_id>Parent Id</parent_id>
+                    <entity_id>Entity Id</entity_id>
+                    <tracks>Tracks</tracks>
+                </attributes>
+                <routes>
+                    <route_collection>
+                        <route>/m2ecloud/shipment-track/:orderId</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                    <route_entity>
+                        <route>/m2ecloud/shipment-track</route>
+                        <action_type>collection</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </m2e_order_track>
+
+            <m2e_order_cancel translate="title" module="api2">
+                <group>sales</group>
+                <model>MultichannelConnect/api2_order_cancel</model>
+                <title>M2E Order Cancel</title>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                    </admin>
+                </privileges>
+                <attributes translate="orderId" module="api2">
+                    <orderId>Order ID</orderId>
+                </attributes>
+                <routes>
+                    <route_entity>
+                        <route>/m2ecloud/order-cancel</route>
+                        <action_type>collection</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </m2e_order_cancel>
+
+            <m2e_module translate="title" module="api2">
+                <group>m2e_multichannel</group>
+                <title>Module Info</title>
+                <model>MultichannelConnect/api2_module</model>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                    </admin>
+                </privileges>
+                <versions>1</versions>
+                <attributes translate="">
+                    <extension_list>Extension List</extension_list>
+                    <version>Version</version>
+                    <name>Name</name>
+                    <is_init_completed>Is Init Completed</is_init_completed>
+                </attributes>
+                <routes>
+                    <route_collection>
+                        <route>/m2ecloud/info</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+            </m2e_module>
+        </resources>
+    </api2>
+</config>

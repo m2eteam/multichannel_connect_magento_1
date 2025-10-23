@@ -1,0 +1,58 @@
+#role_resources .field-row:first-child{
+    display: none;
+}
+.m2e-multichannel-welcome-page + .entry-edit{
+    margin-top: 30px;
+}
+
+.m2e-multichannel-welcome-page {
+    background: #f9f9fb;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 20px 25px;
+    margin: 20px 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.m2e-multichannel-welcome-page h3 {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #2a3f54;
+    border-left: 4px solid #eb5202;
+    padding-left: 8px;
+}
+
+.m2e-multichannel-welcome-page p {
+    margin: 10px 0;
+}
+
+.m2e-multichannel-welcome-page ul.advantages {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 10px 0 15px 0;
+}
+
+.m2e-multichannel-welcome-page .advantages li {
+    margin: 5px 0;
+}
+
+.m2e-multichannel-welcome-page form {
+    margin-top: 20px;
+}
+
+.m2e-multichannel-welcome-page button.action-primary {
+    background: #eb5202;
+    border-color: #eb5202;
+    color: #fff;
+    font-weight: bold;
+    padding: 6px 16px;
+    border-radius: 4px;
+    transition: background 0.2s ease-in-out;
+}
+
+.m2e-multichannel-welcome-page button.action-primary:hover {
+    background: #ba4000;
+    border-color: #ba4000;
+}

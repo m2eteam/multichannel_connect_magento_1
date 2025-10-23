@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <M2E_MultichannelConnect>
+            <active>true</active>
+            <codePool>community</codePool>
+        </M2E_MultichannelConnect>
+    </modules>
+</config>

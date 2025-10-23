@@ -1,0 +1,25 @@
+<?php
+/**
+ * @var $this M2E_MultichannelConnect_Block_Adminhtml_Dashboard
+ */
+?>
+
+<div class="content-header">
+    <h3><?php echo $this->__('M2E Multichannel Connect') ?></h3>
+</div>
+
+<div class="cloud-content">
+    <div class="entry-edit">
+        <iframe src="<?= /* @noEscape */ $this->getIframeUrl() ?>" width="100%" height="800" frameborder="0"></iframe>
+    </div>
+</div>
+
+<style type="text/css">
+    .cloud-content {
+        margin-top: 10px;
+    }
+
+    .entry-edit .form-list td.value button {
+        margin-right: 10px;
+    }
+</style>

@@ -1,0 +1,28 @@
+<?php
+
+// @codingStandardsIgnoreFile
+
+/** @var $this M2E_MultichannelConnect_Block_Adminhtml_Magento_Payment_Info */
+
+?>
+
+<table>
+    <?php if ($this->getPaymentMethod() != '') { ?>
+        <tr>
+            <td style="width: 200px;">
+                <label><?php echo Mage::helper('MultichannelConnect')->__('Payment Method'); ?>:</label>
+            </td>
+            <td>
+                <strong><?php echo $this->escapeHtml($this->getPaymentMethod()); ?></strong>
+            </td>
+        </tr>
+    <?php } ?>
+    <?php if ($this->getChannelOrderId() != '') { ?>
+        <tr>
+            <td style="width: 200px;"><?php echo Mage::helper('MultichannelConnect')->__('Channel Order ID') ?>:</td>
+            <td>
+                <strong><?php echo $this->escapeHtml($this->getChannelOrderId()); ?></strong>
+            </td>
+        </tr>
+    <?php } ?>
+</table>

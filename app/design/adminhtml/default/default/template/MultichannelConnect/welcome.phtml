@@ -1,0 +1,58 @@
+<?php
+/**
+ * @var $this M2E_MultichannelConnect_Block_Adminhtml_Welcome
+ */
+?>
+
+<div class="content-header">
+    <h3><?php echo $this->__('Welcome to M2E Multichannel Connect!') ?></h3>
+</div>
+
+<div class="m2e-multichannel-welcome-page">
+    <p>
+        <?= /* @noEscape */
+        $this->__('Easily connect your Magento 1 store with leading marketplaces using the M2E integration '
+                . 'solution.') ?>
+    </p>
+    <p><?= /* @noEscape */
+        $this->__('With M2E Multichannel Connect, you can:') ?></p>
+    <ul class="advantages">
+        <li><?= /* @noEscape */
+            $this->__('Synchronize your product catalog with selected marketplaces in just a few clicks.') ?></li>
+        <li><?= /* @noEscape */
+            $this->__('Manage inventory, pricing, and product details directly from your Magento admin panel.') ?></li>
+        <li><?= /* @noEscape */
+            $this->__('Automatically process and track orders across both platforms.') ?></li>
+        <li><?= /* @noEscape */
+            $this->__('Enjoy a seamless experience with continuous, reliable updates.') ?></li>
+    </ul>
+
+    <h3><?= /* @noEscape */
+        $this->__('Before You Begin') ?></h3>
+    <p><?= /* @noEscape */
+        $this->__('To ensure smooth operation and full functionality, the integration requires permission to access'
+                . ' specific resources within your Magento 1 store. This access enables accurate data synchronization'
+                . ' and efficient communication between your store and connected marketplaces.') ?></p>
+
+    <h3><?= /* @noEscape */
+        $this->__('Important') ?></h3>
+    <p><?= /* @noEscape */
+        $this->__('By proceeding, you grant the necessary permissions to enable this integration. Your data will be'
+                . ' handled securely and in full compliance with modern security and confidentiality standards.') ?></p>
+    <p><?= /* @noEscape */
+        $this->__('Once confirmed, you’ll be ready to take full advantage of everything M2E Multichannel Connect has'
+                . ' to offer. The current administrator will also be assigned the M2E Multichannel Connect REST'
+                . ' API role.') ?></p>
+    <p><b><?= /* @noEscape */
+            $this->__('Click "Confirm" to continue.') ?></b></p>
+
+    <?=
+    $this->getChildHtml('adminhtml.m2e.role.resources') ?>
+
+    <form action="<?= /* @noEscape */
+    $this->getSubmitUrl(); ?>" method="POST" class="form-inline">
+        <?= $this->getBlockHtml('formkey') ?>
+        <button type='submit' class="action-primary scalable"><?= /* @noEscape */
+            $this->__('Confirm') ?></button>
+    </form>
+</div>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<layout>
+    <multichannelconnect_adminhtml_welcome_index>
+        <reference name="content">
+            <block type="MultichannelConnect/adminhtml_welcome"
+                   name="adminhtml.m2e.welcome"
+                   template="MultichannelConnect/welcome.phtml">
+                <block type="MultichannelConnect/adminhtml_api2_role"
+                       name="adminhtml.m2e.role.resources"
+                       template="permissions/rolesedit.phtml"/>
+            </block>
+        </reference>
+
+        <reference name="head">
+            <action method="setCanLoadExtJs">
+                <flag>1</flag>
+            </action>
+
+            <action method="addCss">
+                <stylesheet>MultichannelConnect/css/welcome.css</stylesheet>
+            </action>
+        </reference>
+    </multichannelconnect_adminhtml_welcome_index>
+</layout>
