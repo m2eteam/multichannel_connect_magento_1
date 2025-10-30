@@ -10,27 +10,38 @@ class M2E_MultichannelConnect_Model_Connector_Client
      */
     public function post($url, $data)
     {
-        $httpClient = new Varien_Http_Client($url);
+        $ch = curl_init();
 
-        $httpClient->setUri($url);
-        $httpClient->setHeaders(array(
-            'Content-Type' => 'application/json'
+        curl_setopt_array($ch, array(
+            CURLOPT_URL => $url,
+            CURLOPT_POST => true,
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json'
+            ),
+            CURLOPT_POSTFIELDS => json_encode($data),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HEADER => false,
+            CURLOPT_CONNECTTIMEOUT => 15,
+            CURLOPT_TIMEOUT => 60
         ));
 
-        $httpClient->setRawData(
-            json_encode($data),
-            'application/json'
-        );
+        $body = curl_exec($ch);
+        if ($body === false) {
+            $err = curl_error($ch);
+            curl_close($ch);
+            throw new Exception('Request error: ' . $err);
+        }
 
-        $response = $httpClient->request(Zend_Http_Client::POST);
+        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
 
-        if ($response->getStatus() !== 200) {
-            throw new Exception('External API error: ' . $response->getBody());
+        if ($status !== 200) {
+            throw new Exception('External API error: ' . $body);
         }
 
         return array(
-            'status'   => $response->getStatus(),
-            'response' => $response->getBody(),
+            'status' => $status,
+            'response' => $body,
         );
     }
 }
