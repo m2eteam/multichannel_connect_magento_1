@@ -6,12 +6,11 @@ class M2E_MultichannelConnect_Model_Module
     const CLOUD_PATH_PATTERN = '?magento1_embedded=true&domain=%s&signature=%s';
 
     const INSTALLED_FLAG_CONFIG_PATH = 'm2e/multichannelconnect/installed';
-    const REST_ROLE_ID_CONFIG_PATH = 'm2e/multichannelconnect/role_id';
-    const CONSUMER_ID_CONFIG_PATH = 'm2e/multichannelconnect/consumer_id';
+    const INIT_HOST_CONFIG_PATH = 'm2e/multichannelconnect/init_host';
 
     public function isModuleConfigured()
     {
-        return (bool)Mage::getStoreConfig(self::INSTALLED_FLAG_CONFIG_PATH);
+        return $this->isSameHost() && Mage::getStoreConfig(self::INSTALLED_FLAG_CONFIG_PATH);
     }
 
     public function activate()
@@ -41,31 +40,11 @@ class M2E_MultichannelConnect_Model_Module
         return self::CLOUD_BASE_URL;
     }
 
-    /**
-     * @return Mage_Oauth_Model_Consumer
-     */
-    public function getIntegration()
+    public function resetActivation()
     {
-        $consumerId = Mage::getStoreConfig(self::CONSUMER_ID_CONFIG_PATH);
-
-        return Mage::getModel('oauth/consumer')->load($consumerId);
-    }
-
-    /**
-     * @return Mage_Api2_Model_Acl_Global_Role
-     * @throws LogicException
-     */
-    public function getM2ERole()
-    {
-        $role = Mage::getModel('api2/acl_global_role')->load(
-            Mage::getStoreConfig(self::REST_ROLE_ID_CONFIG_PATH)
-        );
-
-        if (!$role->getId()) {
-            throw new LogicException('REST role not found');
-        }
-
-        return $role;
+        Mage::getModel('core/config')->saveConfig(self::INSTALLED_FLAG_CONFIG_PATH, 0);
+        Mage::getModel('core/config')->saveConfig(self::INIT_HOST_CONFIG_PATH, '');
+        Mage::getModel('core/config')->cleanCache();
     }
 
     /**
@@ -82,7 +61,9 @@ class M2E_MultichannelConnect_Model_Module
 
     private function getSignature()
     {
-        $integration = $this->getIntegration();
+        /** @var M2E_MultichannelConnect_Model_IntegrationService $integrationService */
+        $integrationService = Mage::getSingleton('MultichannelConnect/IntegrationService');
+        $integration = $integrationService->getIntegration();
 
         return hash_hmac(
             'sha256',
@@ -94,6 +75,9 @@ class M2E_MultichannelConnect_Model_Module
     private function setModuleAsConfigured()
     {
         Mage::getModel('core/config')->saveConfig(self::INSTALLED_FLAG_CONFIG_PATH, 1);
+        Mage::getModel('core/config')->saveConfig(self::INIT_HOST_CONFIG_PATH,
+            Mage::helper('MultichannelConnect')->getDomain()
+        );
     }
 
     private function assignAdminToRole()
@@ -102,12 +86,23 @@ class M2E_MultichannelConnect_Model_Module
         $adminUser = Mage::getSingleton('admin/session')->getUser();
 
         if ($adminUser && $adminUser->getId()) {
-            $role = $this->getM2ERole();
+            /** @var M2E_MultichannelConnect_Model_IntegrationService $integrationService */
+            $integrationService = Mage::getSingleton('MultichannelConnect/IntegrationService');
+            $role = $integrationService->getM2ERole();
+
             /** @var $aclResource Mage_Api2_Model_Resource_Acl_Global_Role */
             $aclResource = Mage::getResourceModel('api2/acl_global_role');
             $aclResource->saveAdminToRoleRelation($adminUser->getId(), $role->getId());
         } else {
             throw new \LogicException('No admin user is currently logged in');
         }
+    }
+
+    private function isSameHost()
+    {
+        $hostDomain = Mage::helper('MultichannelConnect')->getDomain();
+        $initDomain = Mage::getStoreConfig(self::INIT_HOST_CONFIG_PATH);
+
+        return $hostDomain === $initDomain;
     }
 }

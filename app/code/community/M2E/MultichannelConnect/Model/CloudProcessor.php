@@ -9,9 +9,9 @@ class M2E_MultichannelConnect_Model_CloudProcessor
         /** @var M2E_MultichannelConnect_Model_Connector_Client $httpClient */
         $httpClient = Mage::getModel('MultichannelConnect/Connector_Client');
 
-        /** @var M2E_MultichannelConnect_Model_Module $module */
-        $module = Mage::getModel('MultichannelConnect/Module');
-        $integration = $module->getIntegration();
+        /** @var M2E_MultichannelConnect_Model_IntegrationService $integrationService */
+        $integrationService = Mage::getSingleton('MultichannelConnect/IntegrationService');
+        $integration = $integrationService->getIntegration();
 
         /** @var Mage_Core_Model_Store $store */
         $store = Mage::app()->getWebsite(true)->getDefaultStore();

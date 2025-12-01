@@ -65,6 +65,8 @@
                     <total_count>Product Category Ids</total_count>
                     <page_size>Product Category Ids</page_size>
                     <current_page>Product Category Ids</current_page>
+                    <configurable_product_links>Configurable Product Links</configurable_product_links>
+                    <configurable_attributes>Configurable Attributes</configurable_attributes>
                 </attributes>
                 <exclude_attributes>
                     <admin>

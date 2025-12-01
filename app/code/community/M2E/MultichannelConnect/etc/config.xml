@@ -2,7 +2,7 @@
 <config>
     <modules>
         <M2E_MultichannelConnect>
-            <version>1.0.1</version>
+            <version>1.1.0</version>
         </M2E_MultichannelConnect>
     </modules>
     <default>
@@ -64,6 +64,17 @@
                 </all>
                 <admin>
                     <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <m2e_multichannel_settings translate="title" module="MultichannelConnect">
+                                            <title>M2E Multichannel Connect Settings</title>
+                                        </m2e_multichannel_settings>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
                         <multichannelconnect module="MultichannelConnect">
                             <title>M2E Multichannel Connect</title>
                             <sort_order>81</sort_order>
@@ -84,7 +95,11 @@
         <models>
             <MultichannelConnect>
                 <class>M2E_MultichannelConnect_Model</class>
+                <resourceModel>MultichannelConnect_resource</resourceModel>
             </MultichannelConnect>
+            <MultichannelConnect_resource>
+                <class>M2E_MultichannelConnect_Model_Resource</class>
+            </MultichannelConnect_resource>
         </models>
         <resources>
             <MultichannelConnect_setup>

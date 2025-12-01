@@ -11,18 +11,21 @@ class M2E_MultichannelConnect_Adminhtml_WelcomeController
         } else {
             $this->loadLayout()
                 ->_setActiveMenu(self::MENU_ID);
-            $this->initM2eIntegration($module->getM2ERole());
+            $this->initM2eIntegration();
             $this->renderLayout();
         }
     }
 
-    /**
-     * @param Mage_Api2_Model_Acl_Global_Role $role
-     *
-     * @return void
-     */
-    private function initM2eIntegration($role)
+    private function initM2eIntegration()
     {
+        /** @var M2E_MultichannelConnect_Model_IntegrationService $integrationService */
+        $integrationService = Mage::getSingleton('MultichannelConnect/IntegrationService');
+        if (!$integrationService->integrationExists()) {
+            $role = $integrationService->integrationCreate();
+        } else {
+            $role = $integrationService->getM2ERole();
+        }
+
         $roleBlock = $this->getLayout()->getBlock('adminhtml.m2e.role.resources');
         $roleBlock->setRole($role);
     }

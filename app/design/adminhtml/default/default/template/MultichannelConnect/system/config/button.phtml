@@ -1,0 +1,86 @@
+<?php
+/** @var M2E_MultichannelConnect_Block_Adminhtml_System_Config_Button $this */
+?>
+<div class="m2e-multichannel-reset">
+    <?php
+    echo $this->getButtonHtml();
+
+    if (!$this->isAllowedReset()) { ?>
+        <p style="color: green;">
+            <?= Mage::helper('MultichannelConnect')->__('System is running as expected. No reset required.') ?>
+        </p>
+    <?php } ?>
+    <span id="reset_install_msg" style="margin-left:8px;"></span>
+
+    <script type="text/javascript">
+        (function () {
+            if (typeof window.M2E_MultichannelConnect_Reset === 'undefined') {
+                window.M2E_MultichannelConnect_Reset = {
+                    exec: function (buttonEl, url) {
+                        try {
+                            var btn = $(buttonEl);
+                            var msg = $('reset_install_msg');
+
+                            if (!btn) {
+                                if (msg) {
+                                    msg.update('<?php echo $this->escapeHtml(Mage::helper('MultichannelConnect')->__('Button not found')); ?>');
+                                }
+                                return;
+                            }
+
+                            btn.disable();
+                            if (msg) {
+                                msg.update('<?php echo $this->escapeHtml(Mage::helper('MultichannelConnect')->__('Processing...')); ?>');
+                            }
+
+                            new Ajax.Request(url, {
+                                method: 'post',
+                                parameters: {form_key: (typeof FORM_KEY !== 'undefined' ? FORM_KEY : '')},
+                                onSuccess: function (transport) {
+                                    var data = {};
+                                    try {
+                                        data = transport && transport.responseText ? transport.responseText.evalJSON(true) : {};
+                                    } catch (e) {
+                                        data = {
+                                            success: false,
+                                            message: '<?php echo $this->escapeHtml(Mage::helper('MultichannelConnect')->__('Unexpected response')); ?>'
+                                        };
+                                    }
+
+                                    if (data.success) {
+                                        if (msg) {
+                                            msg.update(data.message || '<?php echo $this->escapeHtml(Mage::helper('MultichannelConnect')->__('Completed')); ?>');
+                                        }
+                                        btn.disable();
+                                        btn.addClassName('disabled');
+                                    } else {
+                                        if (msg) {
+                                            msg.update(data.message || '<?php echo $this->escapeHtml(Mage::helper('MultichannelConnect')->__('Failed')); ?>');
+                                        }
+                                        btn.enable();
+                                    }
+                                },
+                                onFailure: function () {
+                                    if (msg) {
+                                        msg.update('<?php echo $this->escapeHtml(Mage::helper('MultichannelConnect')->__('Request failed')); ?>');
+                                    }
+                                    btn.enable();
+                                }
+                            });
+                        } catch (err) {
+                            try {
+                                if (buttonEl) {
+                                    $(buttonEl).enable();
+                                }
+                            } catch (e2) {
+                            }
+                            if (window.console && console.error) {
+                                console.error('M2E_MultichannelConnect_Reset error:', err);
+                            }
+                        }
+                    }
+                };
+            }
+        })();
+    </script>
+</div>
