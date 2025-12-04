@@ -2,7 +2,7 @@
   "name": "m2e/multichannel_connect_magento_1",
   "description": "M2E Multichannel Connect is a Magento 1 extension that lets you add products to Shein, Temu, TikTok Shop, OnBuy, Kaufland, and Otto while syncing orders and inventory. List your products and start selling with M2E",
   "type": "magento-module",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "proprietary",
   "keywords": [
     "magento 1",

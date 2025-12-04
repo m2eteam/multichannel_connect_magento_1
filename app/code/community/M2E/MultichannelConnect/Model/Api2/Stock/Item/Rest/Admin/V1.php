@@ -23,18 +23,14 @@ class M2E_MultichannelConnect_Model_Api2_Stock_Item_Rest_Admin_V1 extends Mage_C
     {
         /* @var $collection Mage_CatalogInventory_Model_Resource_Stock_Item_Collection */
         $collection = Mage::getResourceModel('cataloginventory/stock_item_collection');
+        $collection->addFieldToFilter('cp_table.type_id', 'simple');
         $this->_applyCollectionModifiers($collection);
         $configManageStock = $this->getStoreMangeStockFlag();
 
-        $collection->getSelect()->joinLeft(
-            array('cp' => $collection->getTable('catalog/product')),
-            'main_table.product_id = cp.entity_id',
-            array(
-                'product_sku' => 'cp.sku',
-                'store_manage_stock' => new Zend_Db_Expr((int)$configManageStock)
-
-            )
-        );
+        $collection->getSelect()->columns(array(
+            'product_sku' => 'cp_table.sku',
+            'store_manage_stock' => new Zend_Db_Expr($configManageStock),
+        ));
 
         return $collection;
     }
