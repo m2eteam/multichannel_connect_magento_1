@@ -2,7 +2,7 @@
 <config>
     <modules>
         <M2E_MultichannelConnect>
-            <version>1.1.1</version>
+            <version>1.1.2</version>
         </M2E_MultichannelConnect>
     </modules>
     <default>
@@ -100,6 +100,11 @@
             <MultichannelConnect_resource>
                 <class>M2E_MultichannelConnect_Model_Resource</class>
             </MultichannelConnect_resource>
+            <sales>
+                <rewrite>
+                    <api2_order_rest_admin_v1>M2E_MultichannelConnect_Model_Api2_Order_Rewrite_Order_V1</api2_order_rest_admin_v1>
+                </rewrite>
+            </sales>
         </models>
         <resources>
             <MultichannelConnect_setup>

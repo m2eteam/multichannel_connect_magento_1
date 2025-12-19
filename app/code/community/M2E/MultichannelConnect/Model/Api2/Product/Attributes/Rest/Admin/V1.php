@@ -25,6 +25,7 @@ class M2E_MultichannelConnect_Model_Api2_Product_Attributes_Rest_Admin_V1 extend
         /** @var Mage_Catalog_Model_Resource_Product_Attribute_Collection $collection */
         $collection = Mage::getResourceModel('catalog/product_attribute_collection')
             ->setEntityTypeFilter($entityType->getId());
+        $store = $this->_getStore();
         if (!empty($filteredData[self::ATTRIBUTE_CODES_FILTER])) {
             $collection->addFieldToFilter(
                 'attribute_code',
@@ -37,14 +38,21 @@ class M2E_MultichannelConnect_Model_Api2_Product_Attributes_Rest_Admin_V1 extend
 
         $result = array();
 
-        foreach ($collection as $attribute) {
-            /** @var Mage_Eav_Model_Entity_Attribute $attribute */
-            $result[] = array(
-                'attribute_id' => (int)$attribute->getId(),
-                'attribute_code' => $attribute->getAttributeCode(),
-                'frontend_input' => $attribute->getFrontendInput(),
-                'options' => $this->getAttributeOptions($attribute),
-            );
+        if (
+            M2E_MultichannelConnect_Model_Api2_RequestValidator::isRequestedPageNumberValid(
+                $collection,
+                $this->getRequest()->getPageNumber()
+            )
+        ) {
+            foreach ($collection as $attribute) {
+                /** @var Mage_Eav_Model_Entity_Attribute $attribute */
+                $result[] = array(
+                    'attribute_id' => (int)$attribute->getId(),
+                    'attribute_code' => $attribute->getAttributeCode(),
+                    'frontend_input' => $attribute->getFrontendInput(),
+                    'options' => $this->getAttributeOptions($attribute, $store->getId()),
+                );
+            }
         }
 
         $this->getResponse()->setBody(
@@ -56,11 +64,18 @@ class M2E_MultichannelConnect_Model_Api2_Product_Attributes_Rest_Admin_V1 extend
 
     /**
      * Retrieve attribute options
+     *
+     * @param Mage_Eav_Model_Entity_Attribute $attribute
+     * @param int $storeId
+     *
+     * @return array
+     * @throws Mage_Core_Exception
      */
-    private function getAttributeOptions(Mage_Eav_Model_Entity_Attribute $attribute)
+    private function getAttributeOptions(Mage_Eav_Model_Entity_Attribute $attribute, $storeId)
     {
         $options = array();
         if ($attribute->usesSource()) {
+            $attribute->setStoreId($storeId);
             foreach ($attribute->getSource()->getAllOptions(false) as $opt) {
                 $options[] = array(
                     'label' => $opt['label'],

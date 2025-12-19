@@ -45,6 +45,14 @@ class M2E_MultichannelConnect_Model_Api2_Product_Rest_Admin_V1 extends Mage_Cata
 
         $collection = $this->getProductCollection();
         $loadedIds = $collection->getLoadedIds();
+        if (
+            !M2E_MultichannelConnect_Model_Api2_RequestValidator::isRequestedPageNumberValid(
+                $collection,
+                $this->getRequest()->getPageNumber()
+            )
+        ) {
+            return array();
+        }
 
         /** @var M2E_MultichannelConnect_Model_Resource_Product_Image $productImagesResource */
         $productImagesResource = Mage::getResourceModel('MultichannelConnect/product_image');

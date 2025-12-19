@@ -13,6 +13,15 @@ class M2E_MultichannelConnect_Model_Api2_Category_Rest_Admin_V1 extends Mage_Api
 
         $this->_applyCollectionModifiers($collection);
 
+        if (
+            !M2E_MultichannelConnect_Model_Api2_RequestValidator::isRequestedPageNumberValid(
+                $collection,
+                $this->getRequest()->getPageNumber()
+            )
+        ) {
+            return array();
+        }
+
         return $collection->load()->toArray();
     }
 }
