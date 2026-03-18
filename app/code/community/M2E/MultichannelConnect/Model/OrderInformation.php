@@ -8,6 +8,7 @@ class M2E_MultichannelConnect_Model_OrderInformation extends Varien_Object
     const STORE_VIEW_CODE = 'storeViewCode';
     const CURRENCY = 'currency';
     const CHANNEL_ORDER_ID = 'channelOrderId';
+    const MAGENTO_ORDER_ID = 'magentoOrderId';
     const SHIPPING_INFORMATION = 'shippingInformation';
     const TAX = 'tax';
     const TOTALS = 'totals';
@@ -70,6 +71,15 @@ class M2E_MultichannelConnect_Model_OrderInformation extends Varien_Object
     public function getChannelOrderId()
     {
         return $this->getData(self::CHANNEL_ORDER_ID);
+    }
+
+    /**
+     * Returns magento order id
+     * @return string
+     */
+    public function getMagentoOrderId()
+    {
+        return $this->getData(self::MAGENTO_ORDER_ID);
     }
 
     /**

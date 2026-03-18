@@ -119,6 +119,14 @@ class M2E_MultichannelConnect_Model_Order_ProxyObject
         return $this->orderInformation->getChannelOrderId();
     }
 
+    /**
+     * @return string
+     */
+    public function getMagentoOrderNumber()
+    {
+        return $this->orderInformation->getMagentoOrderId();
+    }
+
     public function getCustomerFirstName()
     {
         return $this->orderInformation->getShippingAddress()->getFirstname();

@@ -182,6 +182,7 @@
             <order>
                 <attributes>
                     <updated_at>Updated At</updated_at>
+                    <state>State</state>
                     <items>Items</items>
                 </attributes>
             </order>

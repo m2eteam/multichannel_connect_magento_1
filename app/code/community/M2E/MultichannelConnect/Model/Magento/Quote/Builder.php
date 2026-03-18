@@ -280,6 +280,17 @@ class M2E_MultichannelConnect_Model_Magento_Quote_Builder
 
     protected function prepareOrderNumber()
     {
+        if ($this->proxyOrder->getMagentoOrderNumber()) {
+            $orderNumber = $this->proxyOrder->getMagentoOrderNumber();
+            if ($this->quote->getResource()->isOrderIncrementIdUsed($orderNumber)) {
+                $orderNumber .= '(1)';
+            }
+
+            $this->quote->setReservedOrderId($orderNumber);
+
+            return;
+        }
+
         $orderNumber = $this->quote->getReservedOrderId();
         empty($orderNumber) && $orderNumber = $this->quote->getResource()->getReservedOrderId($this->quote);
 
@@ -289,6 +300,4 @@ class M2E_MultichannelConnect_Model_Magento_Quote_Builder
 
         $this->quote->setReservedOrderId($orderNumber);
     }
-
-    //########################################
 }
