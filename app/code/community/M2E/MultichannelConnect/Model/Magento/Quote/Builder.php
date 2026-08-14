@@ -96,6 +96,18 @@ class M2E_MultichannelConnect_Model_Magento_Quote_Builder
 
     protected function initializeCustomer()
     {
+        /** @var M2E_MultichannelConnect_Model_Magento_Quote_CustomerFinder $customerFinder */
+        $customerFinder = Mage::getSingleton('MultichannelConnect/Magento_Quote_CustomerFinder');
+        $customer = $customerFinder->findByEmail(
+            $this->proxyOrder->getBuyerEmail(),
+            $this->proxyOrder->getStore()->getWebsiteId()
+        );
+        if ($customer !== null) {
+            $this->quote->setCustomer($customer);
+
+            return;
+        }
+
         $this->quote
             ->setCustomerId(null)
             ->setCustomerEmail($this->proxyOrder->getBuyerEmail())
