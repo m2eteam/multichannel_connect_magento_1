@@ -6,7 +6,12 @@
                 <title>M2E Multichannel Connect</title>
                 <sort_order>150</sort_order>
             </m2e_multichannel>
+            <store translate="title" module="api2">
+                <title>Store</title>
+                <sort_order>149</sort_order>
+            </store>
         </resource_groups>
+
         <resources>
             <m2e_category translate="title" module="api2">
                 <group>catalog_product</group>
@@ -119,6 +124,7 @@
                 </routes>
                 <versions>1</versions>
             </m2e_product>
+
             <m2e_product_attributes module="api2">
                 <group>catalog_product</group>
                 <model>MultichannelConnect/api2_product_attributes</model>
@@ -354,6 +360,34 @@
                     </route_collection>
                 </routes>
             </m2e_module>
+
+            <store_views translate="title" module="api2">
+                <group>store</group>
+                <model>MultichannelConnect/api2_storeView</model>
+                <title>Store Views</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                    </admin>
+                </privileges>
+                <attributes module="api2">
+                    <store_id>Store ID</store_id>
+                    <code>Store Code</code>
+                    <name>Store Name</name>
+                    <website_id>Website ID</website_id>
+                    <store_group_id>Store Group ID</store_group_id>
+                    <is_active>Is Active</is_active>
+                    <extension_attributes>Extension Attributes</extension_attributes>
+                </attributes>
+                <routes>
+                    <route_collection>
+                        <route>/store/storeViews</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </store_views>
         </resources>
     </api2>
 </config>
